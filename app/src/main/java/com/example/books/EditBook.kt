@@ -5,10 +5,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.CheckBox
 import android.widget.EditText
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import com.example.books.dataBase.BookData
+import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 
@@ -47,7 +52,48 @@ class EditBook : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val factory=BookViewModelFactory((requireNotNull(this.activity).application))
+        viewModel=ViewModelProvider(requireActivity(),factory).get(BookViewModel::class.java)
 
+
+        view.findViewById<TextInputEditText>(R.id.autorET).setText(viewModel.book.autor)
+        view.findViewById<TextInputEditText>(R.id.tytulET).setText(viewModel.book.title)
+        view.findViewById<TextInputEditText>(R.id.gatunekET).setText(viewModel.book.gatunek)
+        view.findViewById<TextInputEditText>(R.id.opiniaET).setText(viewModel.book.opinia)
+
+        if (viewModel.book.status==true){
+            view.findViewById<CheckBox>(R.id.status).isChecked
+        }
+
+
+        val database=Firebase.database("https://books-c0eec-default-rtdb.europe-west1.firebasedatabase.app/")
+        val ref=database.getReference("")
+
+
+        view.findViewById<Button>(R.id.usun).apply {
+            setOnClickListener {
+                ref.child(viewModel.book.id.toString()).removeValue()
+                view.findNavController().navigate(R.id.action_editBook_to_read)
+            }
+        }
+
+        view.findViewById<Button>(R.id.edytuj).apply {
+            setOnClickListener {
+                ref.child(viewModel.book.id.toString()).removeValue()
+
+                var status=false
+
+                if(view.findViewById<CheckBox>(R.id.status).isChecked()){
+                    status=true
+                }
+                var booktoadd=BookData(viewModel.book.id.toString(),view.findViewById<EditText>(R.id.autorET).text.toString(),view.findViewById<EditText>(
+                    R.id.tytulET).text.toString(),view.findViewById<EditText>(R.id.gatunekET).text.toString(),view.findViewById<EditText>(R.id.opiniaET).text.toString(),status)
+
+                ref.child(viewModel.book.id.toString()!!).setValue(booktoadd)
+
+                view.findNavController().navigate(R.id.action_editBook_to_read)
+            }
+        }
     }
 
     companion object {

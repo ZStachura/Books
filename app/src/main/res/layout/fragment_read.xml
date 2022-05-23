@@ -4,19 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/przeczytane"
+    android:background="@drawable/szczegoly"
     tools:context=".read">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/appFindByName"
+        style="@style/LoginTextInputOuterFieldStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="174dp"
-        android:layout_marginBottom="13dp"
-        android:textColorHint="#EAEAEA"
-        android:hint="Wyszukaj..."
-        app:boxStrokeColor="#EAEAEA"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginBottom="1dp"
+        app:boxStrokeColor="@color/darkred"
+        app:hintTextColor="@color/darkred"
         app:layout_constraintBottom_toTopOf="@+id/recyclerView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -25,11 +25,11 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/booksearch"
+            style="@style/LoginTextInputInnerFieldStyle"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/deepgreen"
-            android:textColor="#EAEAEA"
-            android:textSize="14sp" />
+            android:layout_height="wrap_content"
+            android:hint="Wyszukaj..."
+            android:inputType="text" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -79,5 +79,22 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addbook" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="131dp"
+        android:layout_marginTop="138dp"
+        android:layout_marginEnd="132dp"
+        android:layout_marginBottom="10dp"
+        android:text="MOJE KSIĄŻKI"
+        android:textColor="#000000"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/appFindByName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

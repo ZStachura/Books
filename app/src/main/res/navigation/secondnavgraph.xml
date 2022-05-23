@@ -30,5 +30,9 @@
         android:id="@+id/editBook"
         android:name="com.example.books.EditBook"
         android:label="fragment_edit_book"
-        tools:layout="@layout/fragment_edit_book" />
+        tools:layout="@layout/fragment_edit_book" >
+        <action
+            android:id="@+id/action_editBook_to_read"
+            app:destination="@id/read" />
+    </fragment>
 </navigation>

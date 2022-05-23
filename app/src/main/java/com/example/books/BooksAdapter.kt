@@ -46,6 +46,7 @@ class BooksAdapter(private val viewModel: BookViewModel, private val books: Muta
         holder.booktitle.text = books.value?.get(position)?.title
 
         holder.myView.setOnClickListener() {
+            viewModel.book= BookData(books.value?.get(position)?.id!!,books.value?.get(position)?.autor!!,books.value?.get(position)?.title!!,books.value?.get(position)?.gatunek!!,books.value?.get(position)?.opinia!!,books.value?.get(position)?.status!!)
             holder.myView.findNavController().navigate(R.id.action_read_to_editBook)
         }
 
